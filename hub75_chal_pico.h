@@ -8,7 +8,7 @@
 typedef struct
 {
     os_thread_id_t id;
-    uint16_t img[4096];
+    uint32_t img[4096];
 } hub75_pico_t;
 
 int hub75_init_pico(void *ptr, int width, int height);
