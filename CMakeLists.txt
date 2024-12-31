@@ -7,3 +7,4 @@ target_sources(${NAME} PUBLIC
     )
 
 pico_generate_pio_header(${NAME} ${CMAKE_CURRENT_LIST_DIR}/ps_hub75_64_BCM.pio)
+pico_btstack_make_gatt_header(${NAME} PRIVATE "${CMAKE_CURRENT_LIST_DIR}/nordic_spp_le_streamer.gatt")
