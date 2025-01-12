@@ -359,37 +359,10 @@ int hal_ble_flush_serial(void)
     return 0;
 }
 
-void ble_spp_init(void)
+hal_bt_serial_err_t hal_ble_serial_init(ble_connected_cb_t cb, ble_disconnected_cb_t disc_cb, char *name, size_t name_len)
 {
-
-    // bluetooth_pair_cb = cb;
-    // bluetooth_disc_cb = disc_cb;
-    //  Generate a fifo to store all the date into
-    spp_in_fifo = create_byte_array_fifo(FIFO_MAX_SIZE);
-    spp_out_fifo = create_byte_array_fifo(FIFO_MAX_SIZE);
-
-    // setup ATT server
-    att_server_init(profile_data, NULL, NULL);
-
-    // setup Nordic SPP service
-    nordic_spp_service_server_init(&nordic_spp_packet_handler);
-
-    // register for ATT events
-    att_server_register_packet_handler(att_packet_handler);
-
-    // setup advertisements
-    uint16_t adv_int_min = 0x0030;
-    uint16_t adv_int_max = 0x0030;
-    uint8_t adv_type = 0;
-    bd_addr_t null_addr;
-    memset(null_addr, 0, 6);
-    gap_advertisements_set_params(adv_int_min, adv_int_max, adv_type, 0, null_addr, 0x07, 0x00);
-    gap_advertisements_set_data(adv_data_len, (uint8_t *)adv_data);
-    gap_advertisements_enable(1);
-
-    // init client state
-    init_connections();
-
     // turn on!
-    hci_power_control(HCI_POWER_ON);
+    int n = hci_power_control(HCI_POWER_ON);
+
+    return HAL_BT_SERIAL_OK;
 }
