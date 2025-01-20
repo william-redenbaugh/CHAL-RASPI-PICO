@@ -3,5 +3,5 @@
 
 #include "hub75_chal_pico.h"
 bool initialize_pico(void);
-
+void reboot_pico(void);
 #endif
